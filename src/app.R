@@ -72,7 +72,7 @@ collatz_fn <- function(pos_integer){
 
 
 #*****************************************
-# 1) Define UI for app that draws a histogram ----
+# 1) Define UI for app that draws the Collatz series ----
 #*****************************************
 
 ui <- fluidPage(
@@ -114,13 +114,24 @@ ui <- fluidPage(
                         # second tab: 
                         tabPanel("Description",
                                  
+                                 h3("From Wikipedia:"), 
+                                 
                                  tags$div(
-                                     tags$p("\nFrom Wikipedia: The Collatz conjecture is a conjecture in mathematics that concerns a sequence defined as follows: start with any positive integer n. Then each term is obtained from the previous term as follows: if the previous term is even, the next term is one half the previous term. If the previous term is odd, the next term is 3 times the previous term plus 1. The conjecture is that no matter what value of n, the sequence will always reach 1."), 
+                                     tags$p("The Collatz conjecture is a conjecture in mathematics that concerns a sequence defined as follows: start with any positive integer n. Then each term is obtained from the previous term as follows: if the previous term is even, the next term is one half the previous term. If the previous term is odd, the next term is 3 times the previous term plus 1. The conjecture is that no matter what value of n, the sequence will always reach 1."), 
                                      tags$br()
                                  ), 
                                  
+                                 h3("Try this: "), 
+                                 
                                  tags$div(
-                                     tags$p("Also see: https://xkcd.com/710/"), 
+                                     tags$p("The algorithm is not complex, so you can put in pretty huge numbers. Try putting in your phone number, then deleting digits one by one to see how the results change. Starting from my phone number, it takes 259 steps to get to 1."), 
+                                     tags$br()
+                                 ),
+                                 
+                                 h3("Also see: "), 
+                                 
+                                 tags$div(
+                                     tags$p("https://xkcd.com/710/"), 
                                      tags$br()
                                  )
                                  
@@ -140,7 +151,7 @@ ui <- fluidPage(
 
 
 #************************************************************************
-# 2) Define server logic required to draw a histogram ----
+# 2) Define server logic required to draw the plot ----
 #************************************************************************
 
 server <- function(input, output) {
