@@ -108,28 +108,21 @@ ui <- fluidPage(
             tabsetPanel(type = "tabs", 
                         
                         # first tab: 
-                        tabPanel("Plot", plotOutput("plot")), 
+                        tabPanel("Plot",  # name of tab to display  
+                                 plotOutput("plot")),  # what to display in the tab
                         
                         # second tab: 
                         tabPanel("Description",
                                  
-                                 h3("The Collatz Conjecture"), 
+                                 tags$div(
+                                     tags$p("\nFrom Wikipedia: The Collatz conjecture is a conjecture in mathematics that concerns a sequence defined as follows: start with any positive integer n. Then each term is obtained from the previous term as follows: if the previous term is even, the next term is one half the previous term. If the previous term is odd, the next term is 3 times the previous term plus 1. The conjecture is that no matter what value of n, the sequence will always reach 1."), 
+                                     tags$br()
+                                 ), 
                                  
                                  tags$div(
-                                     tags$p("Let's say you're building a hospital emergency department (ED), and you need to decide how many beds to include in your design. To do so, you have to consider the demand for these beds, which depends on the number of patients that arrive every day (the 'arrival rate'), and the amount of time each patient requires for treatment (the 'service time')."), 
+                                     tags$p("Also see: https://xkcd.com/710/"), 
                                      tags$br()
                                  )
-                                 
-                        ), 
-                        tabPanel("References", 
-                                 
-                                 tags$div(
-                                     tags$p("1. Gross et al. Fundamentals of Queueing Theory. 2008, p. 69."), 
-                                     tags$p("2. Hall, Randolph. Patient Flow: Reducing delay in healthcare delivery. 2013, p. 365"), 
-                                     tags$p("3. Zai et al. 'Queuing Theory to Guide the Implementation of a Heart Failure Inpatient Registry Program'. J Am Med Inform Assoc., 2009"), 
-                                     tags$p("4. Wiler et al. 'An emergency department patient flow model based on queueing theory principles'. Acad Emerg Med., 2013")
-                                 )
-                                 
                                  
                         )
             )
@@ -185,7 +178,7 @@ server <- function(input, output) {
                                 df$x[nrow(df)], 
                                 " steps")) + 
             
-            theme_classic(base_size = 12)
+            theme_classic(base_size = 16)
         
         
     }, 
