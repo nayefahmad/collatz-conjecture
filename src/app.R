@@ -99,7 +99,13 @@ ui <- fluidPage(
             numericInput(inputId = "input_integer", 
                          label = "Input integer", 
                          value = 10, 
-                         step = 1)
+                         step = 1), 
+            
+            # input number to start the x-axis 
+            numericInput(inputId = "start_x_axis", 
+                         label = "Start x-axis at", 
+                         value = 1, 
+                         step = 5)
             
         ),
         
@@ -132,6 +138,11 @@ ui <- fluidPage(
                                  
                                  tags$div(
                                      tags$p("https://xkcd.com/710/"), 
+                                     tags$br()
+                                 ), 
+                                 
+                                 tags$div(
+                                     tags$p("https://github.com/nayefahmad/collatz-conjecture"), 
                                      tags$br()
                                  )
                                  
@@ -170,7 +181,10 @@ server <- function(input, output) {
         df <- collatz_fn(input$input_integer) %>% 
             as.data.frame() %>% 
             mutate(x = 1:n()) %>% 
-            set_names(c("result", "x"))  
+            set_names(c("result", "x")) %>% 
+            
+            # set starting point for graph: 
+            slice(input$start_x_axis:n())
         
         # draw plot: 
         df %>% 
@@ -184,10 +198,13 @@ server <- function(input, output) {
             scale_y_continuous(expand = c(0, 0)) + 
             
             labs(title = paste0("Starting number: ", 
-                                df$result[1], 
+                                input$input_integer, 
                                 "\nNum steps to get to 1: ", 
                                 df$x[nrow(df)], 
-                                " steps")) + 
+                                " steps"), 
+                 
+                 subtitle = paste0("Showing results from step: ", 
+                                   input$start_x_axis)) + 
             
             theme_classic(base_size = 16)
         
