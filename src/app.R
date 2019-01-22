@@ -103,7 +103,7 @@ ui <- fluidPage(
             
             # input number to start the x-axis 
             numericInput(inputId = "start_x_axis", 
-                         label = "Start x-axis at", 
+                         label = "Start x-axis at \n(use Up and Down arrow keys to change)", 
                          value = 1, 
                          step = 5)
             
